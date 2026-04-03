@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SportingGoodsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,9 +14,18 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 });
 
+
+
 Route::middleware(['auth:sanctum', 'can:admin'])->group(function () {
+    Route::apiResource('/category', CategoryController::class)->except(['index', 'show']);
+    Route::apiResource('/sportingGoods', SportingGoodsController::class)->except(['index', 'show']);
     Route::apiResource('/users', UserController::class);
 });
+
+Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/category/{id}', [CategoryController::class, 'show']);
+Route::get('/sportingGoods', [SportingGoodsController::class, 'index']);
+Route::get('/sportingGoods/{id}', [SportingGoodsController::class, 'show']);
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
