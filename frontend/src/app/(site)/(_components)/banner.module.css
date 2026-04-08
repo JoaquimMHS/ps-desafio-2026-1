@@ -1,9 +1,67 @@
-.container{
-    aspect-ratio: 1200 / 300;
+.container {
+    aspect-ratio: 1200 / 350;
+    position: relative;
+    overflow: hidden;
 }
 
 .bannerImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.botaoCarrosel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: background-color 0.3s ease;
+
+}
+
+.botaoCarrosel:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.botaoAnterior {
+    left: 20px;
+}
+
+.botaoProximo {
+    right: 20px;
+}
+
+@media (max-width: 480px) {
+    .container {
+        
+        aspect-ratio: 4 / 3; 
+    }
+
+    .botaoCarrosel {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    .botaoAnterior {
+        left: 10px;
+    }
+
+    .botaoProximo {
+        right: 10px;
+    }
 }

@@ -28,9 +28,9 @@
 }
 
 .headerLink:hover {
-    color: #0070f3;
+    color: #032144;
     scale: 1.05;
     transition: all 0.3s ease-in-out;
-    border-bottom: 2px solid #0070f3;
+    border-bottom: 2px solid #032144;
 
 }
