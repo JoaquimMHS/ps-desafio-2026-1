@@ -35,6 +35,8 @@ export function DialogCreateSportsItem({ children }: DialogCreateSportsItemProps
 
     const { error } = await JSON.parse(await createSportsItem(newForm))
 
+    console.log("ERRO RETORNADO PELA API:", error);
+
     if (error) {
       setError(error)
       toast({

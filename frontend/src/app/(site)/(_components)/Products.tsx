@@ -1,54 +1,36 @@
-import { sportsItemType } from '@/types/sportsItem';
+"use client";
+import { sportingGoodsType } from '@/types/sportsItem';
 import styles from './products.module.css';
 import ProductCard from './ProductCard';
+import { useState, useEffect } from 'react';
 import { Item } from '@radix-ui/react-dropdown-menu';
+import { api } from '@/services/api';
+import { useSearchParams } from 'next/navigation';
 
 export default function Products() {
-    const sportsItems: sportsItemType[] = [
-        {
-            id: '1',
-            name: 'Barcelona',
-            brand: 'Nike',
-            price: 299.99,
-            year: 2026,
-            image: '/assets/images/barca.png',
-            category: 'Camisa',
-            amount: 10,
-        },
-        {
-            id: '2',
-            name: 'Barcelona',
-            brand: 'Nike',
-            price: 299.99,
-            year: 2026,
-            image: '/assets/images/barca.png',
-            category: 'Camisa',
-            amount: 10,
-        },
-        {
-            id: '3',
-            name: 'Barcelona',
-            brand: 'Nike',
-            price: 299.99,
-            year: 2026,
-            image: '/assets/images/barca.png',
-            category: 'Camisa',
-            amount: 10,
-        },
-        {
-            id: '4',
-            name: 'Barcelona',
-            brand: 'Nike',
-            price: 299.99,
-            year: 2026,
-            image: '/assets/images/barca.png',
-            category: 'Camisa',
-            amount: 0,
-        },
-    ]
 
+    const [sportsItems, setSportsItems] = useState<sportingGoodsType[]>([]);
 
+    const searchParams = useSearchParams();
+const categoryId = searchParams.get("category_id");
 
+  useEffect(() => {
+    async function getSportsItems() {
+      const res = categoryId
+        ? `/sportItems?category_id=${categoryId}`
+        : "/sportingGoods";
+
+      const { response, error } = await api("GET", res);
+
+      if (response) {
+        setSportsItems(response as sportingGoodsType[]);
+      } else {
+        console.error(error?.message);
+      }
+    }
+
+    getSportsItems();
+  }, [categoryId]);
     return (
         <section className={styles.products} id="products">
             <div className={styles.container}> 

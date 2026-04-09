@@ -21,10 +21,10 @@ class Category extends Model
 
     protected static function booted()
     {
-        self::deleting(function(Category $category) {
-            $category->sportingGoods()->each(function(SportingGoods $sportingGoods) {
-                $sportingGoods->delete();
-            });
+        self::deleting(function(Category $category){
+            if($category->products()->count() > 0){
+                throw new \Exception('Não é possível deletar uma categoria que possui produtos vinculados');
+            }
         });
     }
 }

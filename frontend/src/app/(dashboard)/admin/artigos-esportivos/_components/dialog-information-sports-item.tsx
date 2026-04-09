@@ -9,7 +9,7 @@ import {
   DialogDescription,
 } from '@/components/dialog'
 import FormFieldsSportsItem from './form-fields-sports-item'
-import { sportsItemType } from '@/types/sportsItem'
+import { sportingGoodsType } from '@/types/sportsItem'
 import { api } from '@/services/api'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
@@ -24,16 +24,20 @@ export function DialogInformationSportsItem({
   id,
   children,
 }: DialogInformationSportsItemProps) {
-  const [sportsItem, setSportsItem] = useState<sportsItemType | null>(null)
+  const [sportsItem, setSportsItem] = useState<sportingGoodsType | null>(null)
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
   useEffect(() => {
+
+    if(!open) return
+    setSportsItem(null)
+    
     const requestData = async () => {
-      const { response } = null
+      const { response } = await api('GET', `/sportingGoods/${id}`)
 
       if (response) {
-        setSportsItem(response)
+        setSportsItem(response as sportingGoodsType)
       } else {
         setSportsItem(null)
         toast({

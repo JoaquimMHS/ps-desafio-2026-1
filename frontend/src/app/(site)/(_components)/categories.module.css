@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #f0f0f0; /* Cor de fundo suave */
+  border: 2px solid #040355; /* Cor da borda */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  overflow: hidden; /* Garante que o texto não saia do círculo */
+}
+
+.circle:hover {
+  transform: scale(1.1);
+  background-color: #040355;
+  color: white;
+}
+
+.title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0;
+  word-break: break-word;
+}

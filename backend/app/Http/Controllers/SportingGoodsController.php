@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BuySportingGoodsRequest;
 use App\Http\Requests\StoreSportingGoodsRequest;
 use App\Http\Requests\UpdateSportingGoodsRequest;
 use App\Models\SportingGoods;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Nette\Utils\Json;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,9 +25,13 @@ class SportingGoodsController extends Controller
     {
         $this->sportingGoods = $sportingGoods;
     }
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $sportingGoods = $this->sportingGoods->with('category')->get();
+        $query= $this->sportingGoods->with('category');
+        if($request->has('category_id')){
+            $query->where('category_id', $request->input('category_id'));
+        }
+        $sportingGoods = $query->get();
         return response()->json($sportingGoods, Response::HTTP_OK);
     }
 
@@ -87,4 +93,15 @@ class SportingGoodsController extends Controller
 
         return response()->json(['Message' => 'Article deleted successfully']);
     }
+
+    // public function buy(BuySportingGoodsRequest $request, $id): JsonResponse
+    public function buy($id): JsonResponse
+    {
+        $sportingGoods = $this->sportingGoods->findOrFail($id);
+      
+        $sportingGoods->amount --;
+        $sportingGoods->save();
+        return response()->json(['Menssage' => 'Compra realizada com sucesso'], Response::HTTP_OK);
+    } 
+
 }
