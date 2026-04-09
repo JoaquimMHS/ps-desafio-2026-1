@@ -26,32 +26,31 @@ export default function Categories() {
     }, []);
 
     return (
-        <div className={styles.container}> {/* 2. Container flexível */}
 
+        <div className={styles.container} id="categories">
+
+            
             <div
-                className={styles.circle}
+                
+                className={`${styles.circle} ${!currentCategory ? styles.active : ''}`}
                 onClick={() => router.push("/", { scroll: false })}
-                style={{
-                    cursor: "pointer",
-                    border: !currentCategory ? "2px solid #ffd200" : "none",
-                }}
-            > {/* 3. O círculo */}
+               
+            > 
                 <h2 className={styles.title}>Todos</h2>
             </div>
+
+
             {categories.map((item) => (
-                <div key={item.id} className={styles.circle}
+                <div 
+                    key={item.id} 
+                    
+                    className={`${styles.circle} ${currentCategory === String(item.id) ? styles.active : ''}`}
                     onClick={() => router.push(`/?category_id=${item.id}`, { scroll: false })}
-                    style={{
-                        cursor: "pointer",
-                        border: !currentCategory ? "2px solid #ffd200" : "none",
-                    }}
-                > {/* 3. O círculo */}
+                    
+                >
                     <h2 className={styles.title}>{item.name}</h2>
                 </div>
-
             ))}
         </div>
     )
-
-
 }

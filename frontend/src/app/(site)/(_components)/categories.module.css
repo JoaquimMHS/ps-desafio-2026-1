@@ -1,3 +1,4 @@
+
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -10,22 +11,28 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background-color: #f0f0f0; /* Cor de fundo suave */
-  border: 2px solid #040355; /* Cor da borda */
+  background-color: #f0f0f0;
+  
+  border: 2px solid #040355; 
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 10px;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease; 
   cursor: pointer;
-  overflow: hidden; /* Garante que o texto não saia do círculo */
+  overflow: hidden;
 }
 
-.circle:hover {
+.circle.active {
+
+  background-color: #040355; 
+  color: white; 
+}
+
+.circle:not(.active):hover {
   transform: scale(1.1);
-  background-color: #040355;
-  color: white;
+  background-color: #d8d8d8; 
 }
 
 .title {

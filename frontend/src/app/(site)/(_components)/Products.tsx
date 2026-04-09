@@ -10,17 +10,16 @@ import { useSearchParams } from 'next/navigation';
 export default function Products() {
 
     const [sportsItems, setSportsItems] = useState<sportingGoodsType[]>([]);
-
     const searchParams = useSearchParams();
-const categoryId = searchParams.get("category_id");
+    const categoryId = searchParams.get("category_id");
 
   useEffect(() => {
     async function getSportsItems() {
-      const res = categoryId
-        ? `/sportItems?category_id=${categoryId}`
+      const endPoint = categoryId
+        ? `/sportingGoods?category_id=${categoryId}`
         : "/sportingGoods";
 
-      const { response, error } = await api("GET", res);
+      const { response, error } = await api("GET", endPoint);
 
       if (response) {
         setSportsItems(response as sportingGoodsType[]);
