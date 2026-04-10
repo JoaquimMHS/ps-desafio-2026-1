@@ -67,14 +67,14 @@ class SportingGoodsController extends Controller
         $sportingGoods = $this->sportingGoods->with('category')->findOrFail($id);
         $data = $request->validated();
 
-        if ($request->hasFile('image')){
+        if ($request->hasFile('image_url')){
             try{
-                $image_name = explode('sportingGoods/', $sportingGoods['image']);
+                $image_name = explode('sportingGoods/', $sportingGoods['image_url']);
                 Storage::disk('public')->delete('sportingGoods/'.$image_name[1]);
             } catch(Throwable){
             }finally{
-                $path = $request->file('image')->store('sportingGoods', 'public');
-                $data['image'] = url('storage/'.$path);
+                $path = $request->file('image_url')->store('sportingGoods', 'public');
+                $data['image_url'] = url('storage/'.$path);
             }
         }
 

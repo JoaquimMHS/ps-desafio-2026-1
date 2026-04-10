@@ -97,7 +97,9 @@ class User extends Authenticatable
             'name' => $permission,
         ])->first();
 
-        $this->permissions()->detach($permission);
+        if ($permission) {
+            $this->permissions()->detach($permission);
+        }
     }
 
     /**

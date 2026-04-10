@@ -52,7 +52,7 @@ export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemP
       setSportsItem(null)
       setError(null)
     }
-  }, [id, toast])
+  }, [id, open, toast])
 
   const submit = async (form: FormData) => {
     const newForm = await filterFormData(form)
@@ -83,9 +83,13 @@ export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemP
               &quot;Salvar&quot; para aplicar as alterações.
             </DialogDescription>
           </DialogHeader>
-          <form action={submit}>
-            <FormFieldsSportsItem error={error} sportsItem={sportsItem} />
-          </form>
+          {sportsItem ? (
+            <form action={submit}>
+              <FormFieldsSportsItem error={error} sportsItem={sportsItem} />
+            </form>
+          ) : (
+            <div className="flex justify-center p-4">Carregando...</div>
+          )}
         </DialogContent>
       </Dialog>
     )

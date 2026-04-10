@@ -62,7 +62,11 @@ export function DialogInformationSportsItem({
             Visualize as informações detalhadas do artigo esportivo abaixo.
           </DialogDescription>
         </DialogHeader>
-        <FormFieldsSportsItem sportsItem={sportsItem} readOnly />
+        {sportsItem ? (
+          <FormFieldsSportsItem sportsItem={sportsItem} readOnly />
+        ) : (
+          <div className="flex justify-center p-4">Carregando...</div>
+        )}
       </DialogContent>
     </Dialog>
   )

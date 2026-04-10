@@ -28,6 +28,9 @@ export function DialogUpdateUser({ id, children }: DialogUpdateUserProps) {
   const { toast } = useToast()
 
   useEffect(() => {
+    if (!open) return
+    setUser(null)
+
     const requestData = async () => {
       const { response } = await api<userType>('GET', `/users/${id}`)
 
@@ -79,9 +82,13 @@ export function DialogUpdateUser({ id, children }: DialogUpdateUserProps) {
             &quot;Salvar&quot; para aplicar as alterações.
           </DialogDescription>
         </DialogHeader>
-        <form action={submit}>
-          <FormFieldsUser error={error} user={user} />
-        </form>
+        {user ? (
+          <form action={submit}>
+            <FormFieldsUser error={error} user={user} />
+          </form>
+        ) : (
+          <div className="flex justify-center p-4">Carregando...</div>
+        )}
       </DialogContent>
     </Dialog>
   )

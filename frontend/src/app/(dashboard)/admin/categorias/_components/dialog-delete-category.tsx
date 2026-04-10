@@ -27,9 +27,11 @@ export function DialogCategoryDelete({
   const { toast } = useToast()
 
   const submit = async () => {
+
     const { error } = await JSON.parse(await destroyCategory(id))
 
     if (error) {
+    
       toast({
         title: 'Não foi possível excluir a categoria!',
       })
@@ -37,9 +39,9 @@ export function DialogCategoryDelete({
       toast({
         title: 'Categoria deletada com sucesso!',
       })
+      setOpen(false)
     }
 
-    setOpen(false)
   }
 
   return (

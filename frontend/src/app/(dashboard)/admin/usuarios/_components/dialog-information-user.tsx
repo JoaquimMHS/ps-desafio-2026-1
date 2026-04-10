@@ -29,6 +29,9 @@ export function DialogInformationUser({
   const { toast } = useToast()
 
   useEffect(() => {
+    if (!open) return
+    setUser(null)
+
     const requestData = async () => {
       const { response } = await api<userType>('GET', `/users/${id}`)
 
@@ -58,7 +61,11 @@ export function DialogInformationUser({
             Visualize as informações detalhadas do usuário abaixo.
           </DialogDescription>
         </DialogHeader>
-        <FormFieldsUser user={user} readOnly />
+        {user ? (
+          <FormFieldsUser user={user} readOnly />
+        ) : (
+          <div className="flex justify-center p-4">Carregando...</div>
+        )}
       </DialogContent>
     </Dialog>
   )

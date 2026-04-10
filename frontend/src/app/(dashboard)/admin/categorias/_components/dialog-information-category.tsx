@@ -64,7 +64,9 @@ export function DialogInformationCategory({
         </DialogHeader>
         {category ? (
           <FormFieldsCategory category={category} readOnly />
-        ) : null }
+        ) : (
+          <div className="flex justify-center p-4">Carregando...</div>
+        )}
       </DialogContent>
     </Dialog>
   )

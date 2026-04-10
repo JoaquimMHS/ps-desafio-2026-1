@@ -35,7 +35,7 @@ export async function buySportsItem(form: FormData) {
     const res = await api('POST', `/sportingGoods/${id}/buy`, {data: form})
 
     if (!res.error) {
-        revalidatePath('/')
+        revalidatePath('/admin/artigos-esportivos')
     }
 
     return JSON.stringify(res)

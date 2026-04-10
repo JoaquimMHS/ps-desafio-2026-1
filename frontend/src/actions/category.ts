@@ -28,7 +28,7 @@ export async function destroyCategory(id: string) {
     const res = await api('DELETE', `/category/${id}`)
 
     if(!res.error) {
-        revalidatePath('/admin/categories')
+        revalidatePath('/admin/categorias')
     }
 
     return JSON.stringify(res)
